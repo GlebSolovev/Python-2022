@@ -1,4 +1,5 @@
 import inspect
+import os
 from typing import List, NoReturn, Any, Tuple
 import ast
 import _ast
@@ -137,11 +138,14 @@ class AstDrawer(ast.NodeVisitor):
         graph.add_edges_from(edges)
 
         plt.figure(figsize=(30, 25))
-        pos = graphviz_layout(graph, prog="dot")  # need graphviz installed with conda or with apt
+        pos = graphviz_layout(graph, prog="dot")  # need graphviz installed
         nx.draw(graph, node_color=node_colors, pos=pos, labels=labels, with_labels=True,
                 font_size=12, node_shape="s", node_size=[len(labels[i]) * 400 for i in pos])
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
-        plt.savefig("artifacts/ast.png")
+
+        filename = "artifacts/ast.png"
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        plt.savefig(filename)
 
 
 def gen_fibs(n: int) -> List[int]:
@@ -156,6 +160,10 @@ def gen_fibs(n: int) -> List[int]:
     return fibs
 
 
-if __name__ == '__main__':
+def draw_fibs_ast() -> NoReturn:
     drawer = AstDrawer()
     drawer.draw(inspect.getsource(gen_fibs))
+
+
+if __name__ == '__main__':
+    draw_fibs_ast()
