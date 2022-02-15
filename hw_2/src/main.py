@@ -2,9 +2,9 @@ import os
 from typing import NoReturn
 from fibs_ast_drawer.main import draw_fibs_ast
 
-from hw_2.pictures_to_tex import convert_picture_to_tex
-from hw_2.tables_to_tex import convert_tables_to_tex
-from hw_2.wrap_to_tex_document import wrap_into_tex_document
+from pictures_to_tex import convert_picture_to_tex
+from tables_to_tex import convert_tables_to_tex
+from wrap_to_tex_document import wrap_into_tex_document
 
 
 def write_to_file(content: str, filename: str) -> NoReturn:
