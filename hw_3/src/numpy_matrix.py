@@ -7,7 +7,7 @@ import numpy as np
 
 class StrMatrixMixin:
     def __init__(self):
-        self._matrix = [[]]
+        self._matrix = None
 
     def __str__(self) -> str:
         return "\n".join(map(lambda row: " | ".join(map(str, row)), self._matrix))
@@ -28,7 +28,7 @@ class NdarrayError(Exception):
 
 class PropertiesNdarrayMixin:
     def __init__(self):
-        self._ndarray = np.empty([2, 2])
+        self._ndarray = None
 
     @property
     def rows(self) -> int:
