@@ -7,7 +7,7 @@ from concurrent.futures import Executor, ThreadPoolExecutor, ProcessPoolExecutor
 from typing import Callable, Tuple
 from typing.io import TextIO
 
-from hw_4.src.easy_fibs import measure
+from hw_4.src.utils import measure
 
 
 def integrate_task(f: Callable[[float], float], a: float, step: float, iteration: int, start_time: float) \

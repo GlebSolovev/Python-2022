@@ -1,20 +1,13 @@
 import os
-import time
 from multiprocessing import Process
 from threading import Thread
-from typing import Callable, NoReturn
+from typing import NoReturn
 
 from hw_1.src.fibs_ast_drawer.main import gen_fibs
+from hw_4.src.utils import measure
 
 FIBS_N = 10_000
 FIBS_ITERATIONS = 10
-
-
-def measure(callable_task: Callable[[], NoReturn], measure_name: str) -> str:
-    start = time.time()
-    callable_task()
-    end = time.time()
-    return f"{measure_name}: {end - start:.4f}s"
 
 
 def write_to_file(filename: str, content: str) -> NoReturn:
