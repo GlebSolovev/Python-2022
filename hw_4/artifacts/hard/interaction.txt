@@ -1,0 +1,11 @@
+hello
+hello < stdin 00:31:20
+uryyb < stdout 00:31:24
+one
+one < stdin 00:31:26
+two
+two < stdin 00:31:27
+bar < stdout 00:31:29
+gjb < stdout 00:31:34
+stop
+stop < stdin 00:31:40
