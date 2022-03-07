@@ -1,5 +1,0 @@
-Run gen_fibs(10000) for 10 iterations.
-
-synchronous: 0.0440s
-threading with 10 threads: 0.0717s
-multiprocessing with 10 processes: 0.0559s

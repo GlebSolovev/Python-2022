@@ -53,4 +53,4 @@ if __name__ == '__main__':
     res = "\n".join(map(lambda task: measure(*task), tasks))
 
     title = f"Run gen_fibs({FIBS_N}) for {FIBS_ITERATIONS} iterations.\n\n"
-    write_to_file("../artifacts/easy_fibs.txt", title + res)
+    write_to_file("../artifacts/easy/fibs.txt", title + res)
