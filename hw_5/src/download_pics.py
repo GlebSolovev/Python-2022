@@ -22,7 +22,7 @@ async def download_pics(pics_cnt: int, output_dir: str, pics_size: Tuple[int, in
                 if pic_id in pics_ids:
                     print(f"Repeating pic: {pic_id}")
                     continue
-                f = await aiofiles.open(f"{output_dir}/pic{len(pics_ids)}.jpg", mode='wb')
+                f = await aiofiles.open(f"{output_dir}/pic{len(pics_ids)}.jpg", mode="wb")
                 await f.write(await response.read())
                 await f.close()
                 print(f"New pic #{len(pics_ids)} downloaded: {pic_id}")
