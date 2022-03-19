@@ -6,7 +6,7 @@ from typing import NoReturn
 from hw_1.src.fibs_ast_drawer.main import gen_fibs
 from hw_4.src.utils import measure
 
-FIBS_N = 10_000
+FIBS_N = 40_000
 FIBS_ITERATIONS = 10
 
 
