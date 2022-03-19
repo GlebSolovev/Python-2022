@@ -1,11 +1,11 @@
-hello
-hello < stdin 00:31:20
-uryyb < stdout 00:31:24
-one
-one < stdin 00:31:26
-two
-two < stdin 00:31:27
-bar < stdout 00:31:29
-gjb < stdout 00:31:34
+a
+a < stdin 03:36:10
+n < stdout 03:36:10
+aa
+aa < stdin 03:36:12
+aaa
+aaa < stdin 03:36:13
+nn < stdout 03:36:15
+nnn < stdout 03:36:20
 stop
-stop < stdin 00:31:40
+stop < stdin 03:36:23

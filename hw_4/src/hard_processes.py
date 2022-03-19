@@ -9,16 +9,21 @@ STOP_LINE = "stop"
 PROCESS_A_DELAY_SECS = 5
 
 
-def a_task(stdin_queue: Queue, exiting: Value, ab_conn: Connection, ab_condition: Condition):
+def a_task(stdin_queue: Queue, stdin_queue_condition: Condition, exiting: Value, ab_conn: Connection, ab_condition: Condition):
     while not exiting.value:
-        if not stdin_queue.empty():
-            message = stdin_queue.get()
-            lowered_message = message.lower()
+        stdin_queue_condition.acquire()
+        stdin_queue_condition.wait_for(lambda: exiting.value or not stdin_queue.empty())
+        stdin_queue_condition.release()
+        if exiting.value:
+            break
+        message = stdin_queue.get()
+        lowered_message = message.lower()
 
-            ab_conn.send(lowered_message)
-            ab_condition.acquire()
-            ab_condition.notify()
-            ab_condition.release()
+        ab_conn.send(lowered_message)
+        ab_condition.acquire()
+        ab_condition.notify()
+        ab_condition.release()
+
         time.sleep(PROCESS_A_DELAY_SECS)
 
     while not stdin_queue.empty():
@@ -42,13 +47,16 @@ def b_task(exiting: Value, ab_conn: Connection, ab_condition: Condition, out_con
         out_condition.release()
 
 
-def stdin_task(stdin_queue: Queue):
+def stdin_task(stdin_queue: Queue, stdin_queue_condition: Condition):
     while True:
         line = input()
         print(line + " < stdin " + datetime.now().strftime("%H:%M:%S"))
         if line == STOP_LINE:
             return
         stdin_queue.put(line)
+        stdin_queue_condition.acquire()
+        stdin_queue_condition.notify()
+        stdin_queue_condition.release()
 
 
 def stdout_task(exiting: Value, out_conn: Connection, out_condition: Condition):
@@ -64,6 +72,7 @@ def stdout_task(exiting: Value, out_conn: Connection, out_condition: Condition):
 
 def main():
     stdin_queue = Queue()
+    stdin_queue_condition = Condition(Lock())
     exiting = Value('i', False)
 
     parent_ab_conn, child_ab_conn = Pipe()
@@ -72,10 +81,10 @@ def main():
     parent_out_conn, child_out_conn = Pipe()
     out_condition = Condition(Lock())
 
-    process_a = Process(target=a_task, args=(stdin_queue, exiting, parent_ab_conn, ab_condition))
+    process_a = Process(target=a_task, args=(stdin_queue, stdin_queue_condition, exiting, parent_ab_conn, ab_condition))
     process_b = Process(target=b_task, args=(exiting, child_ab_conn, ab_condition, parent_out_conn, out_condition))
 
-    stdin_thread = Thread(target=stdin_task, args=(stdin_queue,))
+    stdin_thread = Thread(target=stdin_task, args=(stdin_queue, stdin_queue_condition))
     stdout_thread = Thread(target=stdout_task, args=(exiting, child_out_conn, out_condition))
 
     # start processes, THEN! local threads
@@ -90,6 +99,10 @@ def main():
     exiting.value = True
 
     # wake up all waiting
+    stdin_queue_condition.acquire()
+    stdin_queue_condition.notify()
+    stdin_queue_condition.release()
+
     ab_condition.acquire()
     ab_condition.notify()
     ab_condition.release()
