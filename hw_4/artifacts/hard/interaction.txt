@@ -1,0 +1,11 @@
+a
+a < stdin 03:36:10
+n < stdout 03:36:10
+aa
+aa < stdin 03:36:12
+aaa
+aaa < stdin 03:36:13
+nn < stdout 03:36:15
+nnn < stdout 03:36:20
+stop
+stop < stdin 03:36:23

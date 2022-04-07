@@ -1,0 +1,39 @@
+thread pool with 1 workers: 0.0220s
+process pool with 1 workers and chunk_size 1: 0.1906s
+process pool with 1 workers and chunk_size 10: 0.0250s
+process pool with 1 workers and chunk_size 100: 0.0115s
+
+thread pool with 2 workers: 0.0181s
+process pool with 2 workers and chunk_size 1: 0.1533s
+process pool with 2 workers and chunk_size 10: 0.0253s
+process pool with 2 workers and chunk_size 100: 0.0119s
+
+thread pool with 3 workers: 0.0199s
+process pool with 3 workers and chunk_size 1: 0.1617s
+process pool with 3 workers and chunk_size 10: 0.0297s
+process pool with 3 workers and chunk_size 100: 0.0160s
+
+thread pool with 4 workers: 0.0447s
+process pool with 4 workers and chunk_size 1: 0.1662s
+process pool with 4 workers and chunk_size 10: 0.0315s
+process pool with 4 workers and chunk_size 100: 0.0183s
+
+thread pool with 5 workers: 0.0198s
+process pool with 5 workers and chunk_size 1: 0.1743s
+process pool with 5 workers and chunk_size 10: 0.0338s
+process pool with 5 workers and chunk_size 100: 0.0212s
+
+thread pool with 6 workers: 0.0207s
+process pool with 6 workers and chunk_size 1: 0.1996s
+process pool with 6 workers and chunk_size 10: 0.0360s
+process pool with 6 workers and chunk_size 100: 0.0223s
+
+thread pool with 7 workers: 0.0204s
+process pool with 7 workers and chunk_size 1: 0.1887s
+process pool with 7 workers and chunk_size 10: 0.0448s
+process pool with 7 workers and chunk_size 100: 0.0256s
+
+thread pool with 8 workers: 0.0202s
+process pool with 8 workers and chunk_size 1: 0.1817s
+process pool with 8 workers and chunk_size 10: 0.0569s
+process pool with 8 workers and chunk_size 100: 0.0330s
